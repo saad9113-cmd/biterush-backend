@@ -64,4 +64,20 @@ router.get('/track/:orderId', async (req, res) => {
   }
 });
 
+// GET full status timeline of an order
+// GET /api/orders/:orderId/timeline
+router.get('/:orderId/timeline', async (req, res) => {
+  try {
+    const [logs] = await db.execute(
+      `SELECT status, updated_at FROM Delivery_Log
+       WHERE order_id = ?
+       ORDER BY updated_at ASC`,
+      [req.params.orderId]
+    );
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
