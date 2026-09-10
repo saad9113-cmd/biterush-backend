@@ -29,6 +29,8 @@ app.use('/api/payments', require('./routes/payments'));
 // DELIVERY ROUTES
 app.use('/api/delivery', require('./routes/delivery'));
 
+app.use('/api/coupons', require('./routes/coupons'));
+
 // START SERVER
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
